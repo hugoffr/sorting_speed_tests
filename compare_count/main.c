@@ -23,10 +23,10 @@ void show(T *data,int first,int one_after_last)
 {
   int i;
 
-  printf("[%2d,%2d]",first,one_after_last - 1);
-  for(i = first;i < one_after_last;i++)
-    printf(" %5d",data[i]);
-  printf("\n");
+  //printf("[%2d,%2d]",first,one_after_last - 1);
+  //for(i = first;i < one_after_last;i++)
+    //printf(" %5d",data[i]);
+  //printf("\n");
 }
 
 //
@@ -66,7 +66,7 @@ void shaker_sort(T *data,int first,int one_after_last)
     for(i = i_last = i_low;i < i_high;i++)
       if(data[i] > data[i + 1])
       {
-		  counter ++; 
+		  counter++; 
         T tmp = data[i];
         data[i] = data[i + 1];
         data[i + 1] = tmp;
@@ -144,6 +144,7 @@ void quick_sort(T *data,int first,int one_after_last)
   {
     insertion_sort(data,first,one_after_last);
 	counter++;
+      printf("%d",counter);
   }
   else
   {
@@ -352,7 +353,7 @@ void selection_sort(T *data,int first,int one_after_last)
 
 int main(void)
 {
-# define max_n  1000
+# define max_n  1000000
 # define n_tests 100
   static struct
   {
@@ -375,7 +376,7 @@ int main(void)
   T master[max_n],data[max_n];
 
   srand((unsigned int)time(NULL));
-  for(n = 1;n <= max_n;n++)
+  for(n = 1;n < max_n;n*10)
   {
     // generate n random numbers
     for(i = 0;i < n;i++)
@@ -385,8 +386,8 @@ int main(void)
     one_after_last = n;
     for(j = 0;j < n_tests;j++)
     {
-		printf("testn= %d n= %d\n", j,n);
-      fprintf(stderr,"%4d[%4d,%4d] \r",n,first,one_after_last);
+		printf("n= %d\n", n);
+      //fprintf(stderr,"%4d[%4d,%4d] \r",n,first,one_after_last);
       for(k = 0;k < (int)(sizeof(functions) / sizeof(functions[0]));k++)
       {
         // all functions use the same unsorted data
@@ -401,14 +402,14 @@ int main(void)
         // test
         if(data[first] < (T)(0))
         {
-          fprintf(stderr,"%s() failed for n=%d, first=%d, and one_after_last=%d (access error)\n",functions[k].name,n,first,one_after_last);
+          //fprintf(stderr,"%s() failed for n=%d, first=%d, and one_after_last=%d (access error)\n",functions[k].name,n,first,one_after_last);
           exit(1);
         }
         for(i = first + 1;i < one_after_last;i++)
           if(data[i] < data[i - 1])
           {
             //show(data,first,one_after_last);
-            fprintf(stderr,"%s() failed for n=%d, first=%d, and one_after_last=%d (sort error for i=%d)\n",functions[k].name,n,first,one_after_last,i);
+            //fprintf(stderr,"%s() failed for n=%d, first=%d, and one_after_last=%d (sort error for i=%d)\n",functions[k].name,n,first,one_after_last,i);
             exit(1);
           }
 		printf("%s %d\n",functions[k].name,counter);

@@ -356,7 +356,7 @@ int main(void)
   T master[max_n],data[max_n];
 
   srand((unsigned int)time(NULL));
-  for(n = 10;n <= max_n;n++)
+  for(n = 10;n < max_n;n=n*10)
   {
     // generate n random numbers
     for(i = 0;i < n;i++)
@@ -367,8 +367,7 @@ int main(void)
 	printf("n= %d\n", n);
     for(j = 0;j < n_tests;j++)
     {
-		printf("test n= %d\n", j);
-      fprintf(stderr,"%4d[%4d,%4d] \r",n,first,one_after_last);
+	//fprintf(stderr,"%4d[%4d,%4d] \r",n,first,one_after_last);
       for(k = 0;k < (int)(sizeof(functions) / sizeof(functions[0]));k++)
       {
         (void)elapsed_time();
@@ -384,14 +383,14 @@ int main(void)
         // test
         if(data[first] < (T)(0))
         {
-          fprintf(stderr,"%s() failed for n=%d, first=%d, and one_after_last=%d (access error)\n",functions[k].name,n,first,one_after_last);
+          //fprintf(stderr,"%s() failed for n=%d, first=%d, and one_after_last=%d (access error)\n",functions[k].name,n,first,one_after_last);
           exit(1);
         }
         for(i = first + 1;i < one_after_last;i++)
           if(data[i] < data[i - 1])
           {
-            show(data,first,one_after_last);
-            fprintf(stderr,"%s() failed for n=%d, first=%d, and one_after_last=%d (sort error for i=%d)\n",functions[k].name,n,first,one_after_last,i);
+            //show(data,first,one_after_last);
+            //fprintf(stderr,"%s() failed for n=%d, first=%d, and one_after_last=%d (sort error for i=%d)\n",functions[k].name,n,first,one_after_last,i);
             exit(1);
           }
 		double dt = elapsed_time();
