@@ -356,7 +356,7 @@ int main(void)
   T master[max_n],data[max_n];
 
   srand((unsigned int)time(NULL));
-  for(n = 10;n < max_n;n=n*10)
+  for(n = 10;n <= max_n;n=n*10)
   {
     // generate n random numbers
     for(i = 0;i < n;i++)
